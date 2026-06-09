@@ -342,3 +342,36 @@ body {
     color: var(--color-text-muted);
     text-align: center;
 }
+
+/* ==========================================
+   TEMA LENDÁRIO
+========================================== */
+
+body.legendary-mode {
+    --color-bg-main: #1c1033;
+    --color-bg-panel: #2b1a4d;
+    --color-card-bg: #38225d;
+    --color-border-accent: #ffd700;
+    --color-text-muted: #d8cfff;
+}
+
+body.legendary-mode .panel-card {
+    border: 2px solid #ffd700;
+    box-shadow:
+        0 0 20px rgba(255,215,0,0.35),
+        0 0 40px rgba(185,103,255,0.35);
+}
+
+body.legendary-mode .main-header h1 {
+    background: linear-gradient(
+        90deg,
+        #ffd700,
+        #ffffff,
+        #b967ff,
+        #00e5ff,
+        #ffd700
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

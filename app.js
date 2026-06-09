@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
    
     const inputName = document.getElementById('player-name');
     const selectPosition = document.getElementById('player-position');
+    const cardRarity = document.getElementById('card-rarity');
     const fileInput = document.getElementById('file-input');
     const dropZone = document.getElementById('drop-zone');
    
@@ -24,6 +25,17 @@ document.addEventListener('DOMContentLoaded', () => {
    
     const btnDownload = document.getElementById('btn-download');
     const btnSpinner = document.getElementById('btn-spinner');
+
+    cardRarity.addEventListener('change', () => {
+
+    if (cardRarity.value === 'legendary') {
+        document.body.classList.add('legendary-mode');
+    } else {
+        document.body.classList.remove('legendary-mode');
+    }
+
+    renderSticker();
+});
  
     // Estado Global da Aplicação
     let userImage = null;
@@ -226,9 +238,31 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.strokeStyle = '#ffffff';
         ctx.strokeRect(15, 15, W - 30, H - 30);
  
-        ctx.lineWidth = 14;
-        ctx.strokeStyle = '#ffdf00';
-        ctx.strokeRect(25, 25, W - 50, H - 50);
+       if (cardRarity.value === 'legendary') {
+
+    const legendaryGradient =
+        ctx.createLinearGradient(
+            0, 0,
+            W, H
+        );
+
+    legendaryGradient.addColorStop(0, '#ffd700');
+    legendaryGradient.addColorStop(0.25, '#ffffff');
+    legendaryGradient.addColorStop(0.50, '#b967ff');
+    legendaryGradient.addColorStop(0.75, '#00e5ff');
+    legendaryGradient.addColorStop(1, '#ffd700');
+
+    ctx.lineWidth = 18;
+    ctx.strokeStyle = legendaryGradient;
+    ctx.strokeRect(25, 25, W - 50, H - 50);
+
+} else {
+
+    ctx.lineWidth = 14;
+    ctx.strokeStyle = '#ffdf00';
+    ctx.strokeRect(25, 25, W - 50, H - 50);
+
+}
  
         ctx.lineWidth = 3;
         ctx.strokeStyle = '#008751';
@@ -284,6 +318,33 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.font = 'bold 36px Teko';
         ctx.textAlign = 'center';
         ctx.fillText('BRA', flagX + 70, flagY + 132);
+        if (cardRarity.value === 'legendary') {
+
+    const badgeX = W - 260;
+    const badgeY = 220;
+
+    ctx.fillStyle = '#ffd700';
+
+    ctx.beginPath();
+    ctx.roundRect(
+        badgeX,
+        badgeY,
+        180,
+        50,
+        [12]
+    );
+    ctx.fill();
+
+    ctx.fillStyle = '#111111';
+    ctx.font = 'bold 28px Teko';
+    ctx.textAlign = 'center';
+
+    ctx.fillText(
+        'LENDÁRIA',
+        badgeX + 90,
+        badgeY + 35
+    );
+}
  
         // 5. RODAPÉ (TARJETA DE IDENTIFICAÇÃO)
         const nameBoxY = H - 240;
